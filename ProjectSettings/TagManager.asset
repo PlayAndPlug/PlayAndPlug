@@ -8,6 +8,10 @@ TagManager:
   - MenuControls
   - Borderline
   - CanvaPart1
+  - EnemyDetector
+  - EnemicMortal
+  - EnemicImmortal
+  - WhipDestroyer
   layers:
   - Default
   - TransparentFX
