@@ -7,11 +7,17 @@ TagManager:
   - MenuPrincipal
   - MenuControls
   - Borderline
-  - CanvaPart1
   - EnemyDetector
   - EnemicMortal
   - EnemicImmortal
   - WhipDestroyer
+  - Victoria
+  - CanvaDerrota
+  - CanvaVictoria
+  - Canva
+  - BanderaVictoria
+  - Trap
+  - Vida
   layers:
   - Default
   - TransparentFX

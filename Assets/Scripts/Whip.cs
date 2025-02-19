@@ -8,7 +8,7 @@ public class Whip : MonoBehaviour
     void Update()
     {
         if(original.name != "Whip"){
-        transform.Translate(Vector3.right * 5f * Time.deltaTime);
+        transform.Translate(Vector3.right * 15f * Time.deltaTime);
         }
     }
 

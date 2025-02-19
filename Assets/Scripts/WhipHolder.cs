@@ -10,6 +10,8 @@ public class WhipHolder : MonoBehaviour
     public Transform spawnPoint; 
     public float spawn;
 
+    public GameObject player;
+
     void Start()
     {
         StartCoroutine(Cooldown());
@@ -17,9 +19,13 @@ public class WhipHolder : MonoBehaviour
 
     private IEnumerator Cooldown(){
         while(true){
-        if (Input.GetKeyDown(KeyCode.A)){
+        if ((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.L)) && cooldown){
             cooldown = false;
-            yield return new WaitForSeconds(3f); 
+            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            yield return new WaitForSeconds(1f); 
+            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            yield return new WaitForSeconds(1.5f); 
             cooldown = true;   
         }
         yield return null;
@@ -29,7 +35,7 @@ public class WhipHolder : MonoBehaviour
     void Update()
     {
         Vector3 spawn = new Vector3(spawnPoint.position.x + 2f, spawnPoint.position.y);      
-        if (Input.GetKeyDown(KeyCode.A) && cooldown)
+        if ((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.L)) && cooldown)
         {
             Instantiate(prefab, spawn, spawnPoint.rotation);
         }

@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private float horizontalDirection;
     private bool isFacingRight = true;
 
+    public bool canMove = true;
+
     [Header("Salto")]
     [SerializeField] private float jumpForce = 15f;
     [SerializeField] private float fallGravityMultiplier = 3f;
@@ -40,7 +42,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(canMove){
         horizontalDirection = Input.GetAxisRaw("Horizontal");
+        }
         CheckGrounded();
         UpdateCoyoteTime();
         HandleJump();
@@ -89,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        if (Input.GetButtonDown("Jump") && canJump)
+        if (Input.GetButtonDown("Jump") && canJump && canMove)
         {
             if (coyoteTimeCounter > 0f)
             {
@@ -103,8 +107,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f && canMove){
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+            }
     }
 
     private void ApplyMovement()
@@ -163,10 +168,5 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(groundCheckPoint.position, groundCheckSize);
         }
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision){
-        
-        
     }
 }

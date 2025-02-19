@@ -6,12 +6,16 @@ public class GameManager : MonoBehaviour
     public int vides = 3;
     private Canvas hud;
     public static GameManager Instance;
-    private static GameObject[] ElementsCanva;
-    private GameObject[] EnemicsMortals;
-    private GameObject[] EnemicsImmortals;
+    public GameObject[] ElementsCanvaDerrota;
+    public GameObject[] ElementsCanvaVictoria;
+    public GameObject[] EnemicsMortals;
+    public GameObject[] EnemicsImmortals;
+    CanvaPart1 canvascript; 
+    PlayerController PlayerController; 
+    public int nivell = 1;
     private void Awake()
     {
-        if (Instance == null)
+      if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -24,10 +28,14 @@ public class GameManager : MonoBehaviour
     }
 
     void RecarregarTot(Scene scene, LoadSceneMode mode){
+    
     hud = FindAnyObjectByType<Canvas>();
-    ElementsCanva = GameObject.FindGameObjectsWithTag("CanvaPart1");
+    ElementsCanvaDerrota = GameObject.FindGameObjectsWithTag("CanvaDerrota");
+    ElementsCanvaVictoria = GameObject.FindGameObjectsWithTag("CanvaVictoria");
     EnemicsMortals = GameObject.FindGameObjectsWithTag("EnemicMortal");
     EnemicsImmortals = GameObject.FindGameObjectsWithTag("EnemicImmortal");
+    canvascript = FindFirstObjectByType<CanvaPart1>(FindObjectsInactive.Include);
+    PlayerController = FindFirstObjectByType<PlayerController>(FindObjectsInactive.Include);
     }
 
     void OnDestroy()
@@ -41,7 +49,6 @@ public class GameManager : MonoBehaviour
 
     public void PerdreVida(){
         vides -= 1;
-        CanvaPart1 canvascript = FindFirstObjectByType<CanvaPart1>(FindObjectsInactive.Include);
         canvascript.TreureVida(vides);
         if (vides == 0){
             Die();
@@ -49,6 +56,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Die(){
+        PlayerController.canMove = false;
         foreach (GameObject Enemic in EnemicsMortals){
             if(Enemic != null){
                 Enemic.SetActive(false);
@@ -59,13 +67,17 @@ public class GameManager : MonoBehaviour
                 Enemic.SetActive(false);
             }
         }
-        CanvaPart1 canvascript = FindFirstObjectByType<CanvaPart1>(FindObjectsInactive.Include);
         for (int i = 0; i < vides; i++){
         canvascript.TreureVida(i);
         }
-        foreach (GameObject obj in ElementsCanva){
-        obj.SetActive(true);
+        foreach (GameObject obj in ElementsCanvaDerrota){
+            obj.SetActive(true);
+    }
+    }
+
+    public void Nextlevel(){
+        canvascript.NextLevel();
     }
 
 }
-}
+

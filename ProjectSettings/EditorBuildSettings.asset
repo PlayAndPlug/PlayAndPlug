@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Part1Joc.unity
     guid: 8afb653067ee3c34ab170b4cfe887050
+  - enabled: 1
+    path: Assets/Scenes/Part2Joc.unity
+    guid: 2455eae0b424fa443b3207683480b53c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
