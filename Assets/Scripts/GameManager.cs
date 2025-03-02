@@ -4,13 +4,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int vides = 3;
+    public int numberScore = 0;
+    public int oldScore = 0;
+    public int HighScore = 0;
     private Canvas hud;
     public static GameManager Instance;
     public GameObject[] ElementsCanvaDerrota;
     public GameObject[] ElementsCanvaVictoria;
     public GameObject[] EnemicsMortals;
     public GameObject[] EnemicsImmortals;
-    CanvaPart1 canvascript; 
+    public GameObject boss;
+    Canvascript canvascript; 
     PlayerController PlayerController; 
     public int nivell = 1;
     private void Awake()
@@ -28,13 +32,13 @@ public class GameManager : MonoBehaviour
     }
 
     void RecarregarTot(Scene scene, LoadSceneMode mode){
-    
+    boss = GameObject.FindGameObjectWithTag("Boss");
     hud = FindAnyObjectByType<Canvas>();
     ElementsCanvaDerrota = GameObject.FindGameObjectsWithTag("CanvaDerrota");
     ElementsCanvaVictoria = GameObject.FindGameObjectsWithTag("CanvaVictoria");
     EnemicsMortals = GameObject.FindGameObjectsWithTag("EnemicMortal");
     EnemicsImmortals = GameObject.FindGameObjectsWithTag("EnemicImmortal");
-    canvascript = FindFirstObjectByType<CanvaPart1>(FindObjectsInactive.Include);
+    canvascript = FindFirstObjectByType<Canvascript>(FindObjectsInactive.Include);
     PlayerController = FindFirstObjectByType<PlayerController>(FindObjectsInactive.Include);
     }
 
@@ -57,6 +61,9 @@ public class GameManager : MonoBehaviour
 
     public void Die(){
         PlayerController.canMove = false;
+        if(boss != null){
+            boss.SetActive(false);
+        }
         foreach (GameObject Enemic in EnemicsMortals){
             if(Enemic != null){
                 Enemic.SetActive(false);

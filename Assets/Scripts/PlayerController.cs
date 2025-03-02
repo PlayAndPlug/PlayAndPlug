@@ -1,21 +1,17 @@
 using UnityEngine;
-
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private Transform groundCheckPoint;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator animator;
-    public GameObject panel;
+    public SpriteRenderer spritePlayer;
 
     [Header("Movimiento")]
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float acceleration = 50f;
     [SerializeField] private float deceleration = 50f;
     private float horizontalDirection;
-    private bool isFacingRight = true;
 
     public bool canMove = true;
 
@@ -139,18 +135,12 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateDirection()
     {
-        if (horizontalDirection > 0 && !isFacingRight)
-            Flip();
-        else if (horizontalDirection < 0 && isFacingRight)
-            Flip();
-    }
-
-    private void Flip()
-    {
-        isFacingRight = !isFacingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        if (horizontalDirection > 0){
+            spritePlayer.flipX = false;
+        }
+        else if (horizontalDirection < 0){
+            spritePlayer.flipX = true;
+        }    
     }
 
     private void UpdateAnimations()
@@ -159,14 +149,5 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
         animator.SetFloat("HorizontalVelocity", Mathf.Abs(rb.linearVelocity.x));
         animator.SetBool("HasDoubleJump", hasDoubleJump);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (groundCheckPoint != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(groundCheckPoint.position, groundCheckSize);
-        }
     }
 }

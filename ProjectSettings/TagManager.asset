@@ -18,6 +18,10 @@ TagManager:
   - BanderaVictoria
   - Trap
   - Vida
+  - BossDetector
+  - TerraBoss
+  - Boss
+  - Whip
   layers:
   - Default
   - TransparentFX

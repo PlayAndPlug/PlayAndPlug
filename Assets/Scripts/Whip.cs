@@ -1,14 +1,18 @@
-using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Whip : MonoBehaviour
 {
     public GameObject original;
+    public SpriteRenderer Playersprite;
     void Update()
     {
         if(original.name != "Whip"){
-        transform.Translate(Vector3.right * 15f * Time.deltaTime);
+        if(!Playersprite.flipX){
+            transform.Translate(Vector3.right * 15f * Time.deltaTime);
+        }
+        else{
+            transform.Translate(Vector3.left * 15f * Time.deltaTime);
+        }
         }
     }
 

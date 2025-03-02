@@ -3,8 +3,6 @@ using UnityEngine;
 public class JumpLevel : MonoBehaviour
 {
     PlayerController PlayerController;
-    CanvaPart1 canvascript;
-
     public GameObject[] vides;
     void Start()
     {

@@ -39,6 +39,9 @@ public class Menu : MonoBehaviour
     }
 
     public void Jugar(){
+        GameManager.Instance.nivell = 1;
+        GameManager.Instance.numberScore = 0;
+        GameManager.Instance.oldScore = 0;
         GameManager.Instance.LoadScene("Part1Joc");
     }
 }
