@@ -6,9 +6,6 @@ public class HighScoreMainMenu : MonoBehaviour
     public TextMeshProUGUI score;
 
     void Start(){
-        UpdateText();
+        score.text = $"Your Highest Score: {GameManager.Instance.HighScore}";
     }
-    public void UpdateText(){
-    score.text = $"Your Highest Score: {GameManager.Instance.HighScore}";
-}
 }

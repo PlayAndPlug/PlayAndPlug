@@ -148,6 +148,5 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
         animator.SetFloat("HorizontalVelocity", Mathf.Abs(rb.linearVelocity.x));
-        animator.SetBool("HasDoubleJump", hasDoubleJump);
     }
 }
